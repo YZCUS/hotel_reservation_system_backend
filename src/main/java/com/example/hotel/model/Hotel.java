@@ -6,7 +6,8 @@ import jakarta.persistence.*;
 @Table(name = "hotels")
 public class Hotel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_generator")
+    @Column(name = "hotel_id")
     private Long hotelId;
     @Column(name = "name")
     private String hotelName;

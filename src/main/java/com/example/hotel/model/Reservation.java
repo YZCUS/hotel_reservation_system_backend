@@ -10,9 +10,9 @@ import java.util.Date;
 public class Reservation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_generator")
     private Long reservationId;
-    @Column(name = "room_id")
+    @Column(name = "room_id", insertable = false, updatable = false)
     private Long roomId;
     @Column(name = "customer_id")
     private Long customerId;

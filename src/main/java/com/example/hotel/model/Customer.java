@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_generator")
     private Long customerId;
     private String name;
     private String email;

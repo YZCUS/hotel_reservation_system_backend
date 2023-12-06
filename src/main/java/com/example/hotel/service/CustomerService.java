@@ -18,7 +18,7 @@ public class CustomerService {
         return customerRepository.findCustomerByEmail(email);
     }
     public List<Customer> findCustomerByPhone(String phoneNumber) {
-        return customerRepository.findCustomerByPhone(phoneNumber);
+        return customerRepository.findCustomerByPhoneNumber(phoneNumber);
     }
     @Transactional
     public Customer addCustomer(Customer customer) {

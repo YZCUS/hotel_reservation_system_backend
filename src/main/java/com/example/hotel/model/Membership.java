@@ -8,7 +8,7 @@ import java.util.Date;
 @Table(name = "membership")
 public class Membership {
     @Id
-    @GeneratedValue(generator = "GenerationType.IDENTITY")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_generator")
     private Long membershipId;
     @Column(name = "customer_id")
     private Long customerId;

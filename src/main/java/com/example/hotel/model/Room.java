@@ -8,9 +8,10 @@ import java.math.BigDecimal;
 @Table(name = "rooms")
 public class Room {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_generator")
+    @Column(name = "room_id")
     private Long roomId;
-    @Column(name = "hotel_id")
+    @Column(name = "hotel_id", insertable = false, updatable = false)
     private Long hotelId;
     private String number;
     @ManyToOne

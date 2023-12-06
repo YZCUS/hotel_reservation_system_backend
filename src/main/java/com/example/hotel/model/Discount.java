@@ -10,7 +10,7 @@ import java.util.Date;
 public class Discount {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_generator")
     private Long discountId;
     private String code;
     private String description;
