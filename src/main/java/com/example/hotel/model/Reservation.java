@@ -14,7 +14,7 @@ public class Reservation {
     private Long reservationId;
     @Column(name = "room_id", insertable = false, updatable = false)
     private Long roomId;
-    @Column(name = "customer_id")
+    @Column(name = "customer_id", insertable = false, updatable = false)
     private Long customerId;
     @ManyToOne
     @JoinColumn(name = "room_id", referencedColumnName = "room_id")
