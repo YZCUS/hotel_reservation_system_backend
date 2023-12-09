@@ -8,6 +8,8 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_generator")
     private Long addressId;
+    @Column(name = "street_num")
+    private String streetNum;
     private String street;
     private String city;
     private String state;
@@ -15,8 +17,9 @@ public class Address {
     private String zipCode;
     private String country;
 
-    public Address(Long addressId, String street, String city, String state, String zipCode, String country) {
+    public Address(Long addressId, String streetNum, String street, String city, String state, String zipCode, String country) {
         this.addressId = addressId;
+        this.streetNum = streetNum;
         this.street = street;
         this.city = city;
         this.state = state;
@@ -24,7 +27,8 @@ public class Address {
         this.country = country;
     }
 
-    public Address(String street, String city, String state, String zipCode, String country) {
+    public Address(String streetNum, String street, String city, String state, String zipCode, String country) {
+        this.streetNum = streetNum;
         this.street = street;
         this.city = city;
         this.state = state;
@@ -42,6 +46,14 @@ public class Address {
 
     public void setAddressId(Long addressId) {
         this.addressId = addressId;
+    }
+
+    public String getStreetNum() {
+        return streetNum;
+    }
+
+    public void setStreetNum(String streetNum) {
+        this.streetNum = streetNum;
     }
 
     public String getStreet() {
