@@ -1,9 +1,6 @@
 package com.example.hotel.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -11,8 +8,9 @@ public class User {
     @Id
     private String username;
     private String password;
-    @Column(name = "customer_id", insertable = false, updatable = false)
+    @Column(name = "customer_id")
     private Long customerId;
+
 
     public User(String username, String password, Long customerId) {
         this.username = username;
