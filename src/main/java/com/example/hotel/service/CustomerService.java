@@ -20,10 +20,7 @@ public class CustomerService {
     public List<Customer> findCustomerByPhone(String phoneNumber) {
         return customerRepository.findCustomerByPhoneNumber(phoneNumber);
     }
-    @Transactional
-    public Customer addCustomer(Customer customer) {
-        return customerRepository.save(customer);
+    public Customer getCustomerInfo(Long customerId) {
+        return customerRepository.findByCustomerId(customerId);
     }
-
-
 }
