@@ -1,14 +1,15 @@
 package com.example.hotel.controller;
 
 import com.example.hotel.dto.ReservationSummary;
+import com.example.hotel.dto.SearchParameters;
 import com.example.hotel.model.Reservation;
+import com.example.hotel.model.Room;
 import com.example.hotel.service.ReservationService;
+import com.example.hotel.service.RoomService;
 import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -16,8 +17,10 @@ import java.util.List;
 @RequestMapping("/reservation")
 public class ReservationController {
     private final ReservationService reservationService;
-    public ReservationController(ReservationService reservationService) {
+    private final RoomService roomService;
+    public ReservationController(ReservationService reservationService, RoomService roomService) {
         this.reservationService = reservationService;
+        this.roomService = roomService;
     }
     @PostMapping("/history")
     public List<ReservationSummary> getReservationByCustomerId(Long customerId) {
@@ -30,4 +33,9 @@ public class ReservationController {
         return isCancelled? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
+    @PostMapping("/search")
+    public ResponseEntity<List<Room>> search(@RequestBody SearchParameters searchParameters) {
+        List<Room> results = roomService.search(searchParameters);
+        return ResponseEntity.ok(results);
+    }
 }
