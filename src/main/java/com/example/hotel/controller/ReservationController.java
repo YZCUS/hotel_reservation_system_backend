@@ -37,11 +37,11 @@ public class ReservationController {
         }
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<?> updateReservationStatus(@RequestParam Long reservationId, @RequestParam String newStatus) {
-        boolean isUpdateReservation = reservationService.updateReservationStatus(reservationId, newStatus);
-        if (isUpdateReservation) {
-            return ResponseEntity.ok().build();
+    @PostMapping("/update")
+    public ResponseEntity<?> updateReservationStatus(@RequestParam Long customerId,@RequestParam Long reservationId, @RequestParam String newStatus) {
+        List<Reservation> updateReservation = reservationService.updateReservationStatus(customerId, reservationId, newStatus);
+        if (updateReservation != null) {
+            return ResponseEntity.ok(updateReservation);
         }
         else{
             return ResponseEntity.notFound().build();

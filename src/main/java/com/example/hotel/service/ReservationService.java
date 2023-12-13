@@ -28,14 +28,14 @@ public class ReservationService {
         return reservationRepository.getReservationByCustomerId(customerId);
     }
 
-    public boolean updateReservationStatus(Long reservationId, String newStatus) {
+    public List<Reservation> updateReservationStatus(Long customerId, Long reservationId, String newStatus) {
         Reservation reservation = reservationRepository.findById(reservationId).orElse(null);
         if (reservation == null) {
-            return false;
+            return null;
         }
         reservation.setStatus(newStatus);
         reservationRepository.save(reservation);
-        return true;
+        return reservationRepository.findReservationByCustomerId(customerId);
     }
 
     public Reservation createReservation(PendingReservation pendingReservation) {
