@@ -7,6 +7,7 @@ public class ReservationDetails {
     private Long hotelId;
     private String hotelName;
     private String hotelAddress;
+    private Long roomId;
     private String roomType;
     private Integer bedNumber;
     private Integer capacity;
@@ -16,10 +17,11 @@ public class ReservationDetails {
     private LocalDate checkOutDate;
     private BigDecimal totalPrice;
 
-    public ReservationDetails(Long hotelId, String hotelName, String hotelAddress, String roomType, Integer bedNumber, Integer capacity, String roomNumber, BigDecimal pricePerNight, LocalDate checkInDate, LocalDate checkOutDate, BigDecimal totalPrice) {
+    public ReservationDetails(Long hotelId, String hotelName, String hotelAddress, Long roomId, String roomType, Integer bedNumber, Integer capacity, String roomNumber, BigDecimal pricePerNight, LocalDate checkInDate, LocalDate checkOutDate, BigDecimal totalPrice) {
         this.hotelId = hotelId;
         this.hotelName = hotelName;
         this.hotelAddress = hotelAddress;
+        this.roomId = roomId;
         this.roomType = roomType;
         this.bedNumber = bedNumber;
         this.capacity = capacity;
@@ -55,6 +57,14 @@ public class ReservationDetails {
 
     public void setHotelAddress(String hotelAddress) {
         this.hotelAddress = hotelAddress;
+    }
+
+    public Long getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(Long roomId) {
+        this.roomId = roomId;
     }
 
     public String getRoomType() {

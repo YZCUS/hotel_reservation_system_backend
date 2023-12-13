@@ -63,6 +63,14 @@ public class Room {
         this.hotelId = hotelId;
     }
 
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
     public String getNumber() {
         return number;
     }
@@ -102,4 +110,6 @@ public class Room {
     public void setPricePerNight(BigDecimal pricePerNight) {
         this.pricePerNight = pricePerNight;
     }
+
+
 }

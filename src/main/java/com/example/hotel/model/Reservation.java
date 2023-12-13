@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -15,7 +16,7 @@ public class Reservation {
     private Long reservationId;
     @Column(name = "room_id", insertable = false, updatable = false)
     private Long roomId;
-    @Column(name = "customer_id", insertable = false, updatable = false)
+    @Column(name = "customer_id")
     private Long customerId;
     @ManyToOne
     @JoinColumn(name = "room_id", referencedColumnName = "room_id")
@@ -27,6 +28,8 @@ public class Reservation {
     @Column(name = "total_price")
     private BigDecimal totalPrice;
     private String status;
+    @Column(name = "create_time")
+    private LocalDateTime createdTime;
 
     public Reservation(Long reservationId, Long roomId, Long customerId, LocalDate checkInDate, LocalDate checkOutDate, BigDecimal totalPrice, String status) {
         this.reservationId = reservationId;
@@ -36,6 +39,7 @@ public class Reservation {
         this.checkOutDate = checkOutDate;
         this.totalPrice = totalPrice;
         this.status = status;
+        this.createdTime = LocalDateTime.now();
     }
 
     public Reservation(Long roomId, Long customerId, LocalDate checkInDate, LocalDate checkOutDate, BigDecimal totalPrice, String status) {
@@ -45,10 +49,11 @@ public class Reservation {
         this.checkOutDate = checkOutDate;
         this.totalPrice = totalPrice;
         this.status = status;
+        this.createdTime = LocalDateTime.now();
     }
 
     public Reservation() {
-
+        this.createdTime = LocalDateTime.now();
     }
 
     public void setReservationId(Long reservationId) {
@@ -65,6 +70,14 @@ public class Reservation {
 
     public void setRoomId(Long roomId) {
         this.roomId = roomId;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     public Long getCustomerId() {
@@ -105,5 +118,13 @@ public class Reservation {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public LocalDateTime getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(LocalDateTime createdTime) {
+        this.createdTime = createdTime;
     }
 }

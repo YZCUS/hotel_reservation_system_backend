@@ -1,12 +1,12 @@
 package com.example.hotel.controller;
 
+import com.example.hotel.dto.ReservationDetails;
 import com.example.hotel.dto.ReservationSummary;
 import com.example.hotel.dto.SearchParameters;
+import com.example.hotel.dto.PendingReservation;
 import com.example.hotel.model.Reservation;
-import com.example.hotel.model.Room;
 import com.example.hotel.service.ReservationService;
 import com.example.hotel.service.RoomService;
-import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,15 +27,25 @@ public class ReservationController {
         return reservationService.getReservationByCustomerId(customerId);
     }
 
-    @PutMapping("/cancel")
-    public ResponseEntity<?> cancelReservation(Long reservationId) {
-        boolean isCancelled = reservationService.cancelReservation(reservationId);
-        return isCancelled? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    @PutMapping("/update")
+    public ResponseEntity<?> updateReservationStatus(@RequestParam Long reservationId, @RequestParam String newStatus) {
+        boolean isUpdateReservation = reservationService.updateReservationStatus(reservationId, newStatus);
+        if (isUpdateReservation) {
+            return ResponseEntity.ok().build();
+        }
+        else{
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping("/search")
-    public ResponseEntity<List<Room>> search(@RequestBody SearchParameters searchParameters) {
-        List<Room> results = roomService.search(searchParameters);
+    public ResponseEntity<List<ReservationDetails>> search(@RequestBody SearchParameters searchParameters) {
+        List<ReservationDetails> results = roomService.search(searchParameters);
         return ResponseEntity.ok(results);
+    }
+    @PostMapping("/pending")
+    public ResponseEntity<Reservation> createReservation(@RequestBody PendingReservation pendingReservation) {
+        Reservation newReservation = reservationService.createReservation(pendingReservation);
+        return ResponseEntity.ok(newReservation);
     }
 }

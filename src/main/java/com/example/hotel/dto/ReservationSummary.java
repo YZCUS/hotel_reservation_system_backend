@@ -6,15 +6,21 @@ import java.time.LocalDate;
 public class ReservationSummary {
     private Long reservationId;
     private String roomType;
+    private String roomNumber;
+    private String hotelName;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private BigDecimal totalPrice;
-    public ReservationSummary(Long reservationId, String roomType, LocalDate checkInDate, LocalDate checkOutDate, BigDecimal totalPrice) {
+    private String status;
+    public ReservationSummary(Long reservationId, String roomType, String roomNumber, String hotelName, LocalDate checkInDate, LocalDate checkOutDate, BigDecimal totalPrice, String status) {
         this.reservationId = reservationId;
         this.roomType = roomType;
+        this.roomNumber = roomNumber;
+        this.hotelName = hotelName;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.totalPrice = totalPrice;
+        this.status = status;
     }
     public ReservationSummary() {
 
@@ -34,6 +40,22 @@ public class ReservationSummary {
 
     public void setRoomType(String roomType) {
         this.roomType = roomType;
+    }
+
+    public String getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public String getHotelName() {
+        return hotelName;
+    }
+
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
     }
 
     public LocalDate getCheckInDate() {
@@ -58,5 +80,13 @@ public class ReservationSummary {
 
     public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
