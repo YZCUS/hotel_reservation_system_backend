@@ -13,6 +13,9 @@ public class Hotel {
     private String hotelName;
     @Column(name = "address_id")
     private Long addressId;
+    @OneToOne
+    @JoinColumn(name = "address_id", insertable = false, updatable = false)
+    Address hotelAddress;
     @Column(name = "contact_number")
     private String contactNumber;
     private String email;
@@ -57,6 +60,14 @@ public class Hotel {
 
     public void setAddressId(Long addressId) {
         this.addressId = addressId;
+    }
+
+    public Address getHotelAddress() {
+        return hotelAddress;
+    }
+
+    public void setHotelAddress(Address hotelAddress) {
+        this.hotelAddress = hotelAddress;
     }
 
     public String getContactNumber() {

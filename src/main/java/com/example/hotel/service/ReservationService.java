@@ -3,6 +3,7 @@ package com.example.hotel.service;
 import com.example.hotel.dto.PendingReservation;
 import com.example.hotel.dto.ReservationDetails;
 import com.example.hotel.dto.ReservationSummary;
+import com.example.hotel.model.Address;
 import com.example.hotel.model.Reservation;
 import com.example.hotel.model.Room;
 import com.example.hotel.repository.ReservationRepository;
@@ -59,6 +60,30 @@ public class ReservationService {
         reservation.setRoom(room);
 
         return reservationRepository.save(reservation);
+    }
+
+    public ReservationDetails getReservationById(Long reservationId) {
+        Reservation reservation = reservationRepository.findById(reservationId).orElse(null);
+        if (reservation == null) {
+            return null;
+        }
+        ReservationDetails reservationDetails = new ReservationDetails();
+        reservationDetails.setHotelId(reservation.getRoom().getHotel().getHotelId());
+        reservationDetails.setHotelName(reservation.getRoom().getHotel().getHotelName());
+        Address hotelAddressObject = reservation.getRoom().getHotel().getHotelAddress();
+        String hotelAddress = hotelAddressObject.getStreetNum() + ", " +hotelAddressObject.getStreet()+", "+ hotelAddressObject.getCity() + ", "
+                + hotelAddressObject.getCountry() + ", " + hotelAddressObject.getZipCode();
+        reservationDetails.setHotelAddress(hotelAddress);
+        reservationDetails.setRoomId(reservation.getRoomId());
+        reservationDetails.setRoomType(reservation.getRoom().getType());
+        reservationDetails.setBedNumber(reservation.getRoom().getBedNumber());
+        reservationDetails.setCapacity(reservation.getRoom().getCapacity());
+        reservationDetails.setRoomNumber(reservation.getRoom().getNumber());
+        reservationDetails.setPricePerNight(reservation.getRoom().getPricePerNight());
+        reservationDetails.setCheckInDate(reservation.getCheckInDate());
+        reservationDetails.setCheckOutDate(reservation.getCheckOutDate());
+        reservationDetails.setTotalPrice(reservation.getTotalPrice());
+        return reservationDetails;
     }
 }
 

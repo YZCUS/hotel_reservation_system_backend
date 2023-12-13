@@ -26,6 +26,16 @@ public class ReservationController {
     public List<ReservationSummary> getReservationByCustomerId(Long customerId) {
         return reservationService.getReservationByCustomerId(customerId);
     }
+    @GetMapping("/view")
+    public ResponseEntity<ReservationDetails> getReservationById(@RequestParam Long reservationId) {
+        ReservationDetails reservationDetails = reservationService.getReservationById(reservationId);
+        if (reservationDetails != null) {
+            return ResponseEntity.ok(reservationDetails);
+        }
+        else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @PutMapping("/update")
     public ResponseEntity<?> updateReservationStatus(@RequestParam Long reservationId, @RequestParam String newStatus) {
