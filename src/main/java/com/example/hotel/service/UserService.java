@@ -15,13 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserService {
     private final UserRepository userRepository;
     private final CustomerRepository customerRepository;
-//    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserService(UserRepository userRepository, CustomerRepository customerRepository) {
         this.userRepository = userRepository;
         this.customerRepository = customerRepository;
-//        this.passwordEncoder = passwordEncoder;
+
     }
     @Transactional
     public void register(RegistrationRequest registrationRequest) {
