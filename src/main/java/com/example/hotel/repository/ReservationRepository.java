@@ -21,4 +21,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     @Query("SELECT r FROM Reservation r WHERE r.status = 'confirmed' AND r.checkInDate <= CURRENT_DATE")
     List<Reservation> findConfirmedAndPastReservations();
+
+    List<Reservation> findReservationByRoomId(Long roomId);
 }

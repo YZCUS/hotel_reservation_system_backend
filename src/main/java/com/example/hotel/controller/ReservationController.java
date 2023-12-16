@@ -56,6 +56,10 @@ public class ReservationController {
     @PostMapping("/pending")
     public ResponseEntity<Reservation> createReservation(@RequestBody PendingReservation pendingReservation) {
         Reservation newReservation = reservationService.createReservation(pendingReservation);
-        return ResponseEntity.ok(newReservation);
+        if (newReservation == null) {
+            return ResponseEntity.notFound().build();
+        }else {
+            return ResponseEntity.ok(newReservation);
+        }
     }
 }

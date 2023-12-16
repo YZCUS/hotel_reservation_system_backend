@@ -7,20 +7,20 @@ import com.example.hotel.repository.CustomerRepository;
 import com.example.hotel.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import com.example.hotel.util.PasswordUtils;
 @Service
 public class UserService {
     private final UserRepository userRepository;
     private final CustomerRepository customerRepository;
+    private final PasswordUtils passwordUtils;
 
     @Autowired
-    public UserService(UserRepository userRepository, CustomerRepository customerRepository) {
+    public UserService(UserRepository userRepository, CustomerRepository customerRepository, PasswordUtils passwordUtils) {
         this.userRepository = userRepository;
         this.customerRepository = customerRepository;
-
+        this.passwordUtils = passwordUtils;
     }
     @Transactional
     public void register(RegistrationRequest registrationRequest) {
@@ -34,7 +34,8 @@ public class UserService {
 
 
         // Create and save the user
-        User user = new User(registrationRequest.getUsername(), registrationRequest.getPassword(), customer.getCustomerId());
+        String encryptedPassword = passwordUtils.encrypt(registrationRequest.getPassword());
+        User user = new User(registrationRequest.getUsername(), encryptedPassword, customer.getCustomerId());
         userRepository.save(user);
     }
     public boolean existsByUsername(String username) {
@@ -46,10 +47,12 @@ public class UserService {
         if (user == null) {
             throw new RuntimeException("User not found");
         }
-        if (!user.getPassword().equals(currentPassword)) {
+        String decryptedPassword = passwordUtils.decrypt(user.getPassword());
+        if (!decryptedPassword.equals(currentPassword)) {
             throw new RuntimeException("Old password is incorrect");
         }
-        user.setPassword(newPassword);
+        String newEncryptedPassword = passwordUtils.encrypt(newPassword);
+        user.setPassword(newEncryptedPassword);
         userRepository.save(user);
     }
 

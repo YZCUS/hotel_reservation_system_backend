@@ -11,6 +11,8 @@ import com.example.hotel.repository.RoomRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -20,7 +22,6 @@ import java.util.List;
 public class ReservationService {
     @Autowired
     private ReservationRepository reservationRepository;
-    private List<String> reservationByCustomerId;
     @Autowired
     private RoomRepository roomRepository;
 
@@ -38,6 +39,7 @@ public class ReservationService {
         return reservationRepository.findReservationByCustomerId(customerId);
     }
 
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public Reservation createReservation(PendingReservation pendingReservation) {
         Long roomId = pendingReservation.getRoomId();
         Long customerId = pendingReservation.getCustomerId();
@@ -46,9 +48,6 @@ public class ReservationService {
         BigDecimal totalPrice = pendingReservation.getTotalPrice();
         String status = pendingReservation.getStatus();
         Room room = roomRepository.findById(roomId).orElseThrow(() -> new EntityNotFoundException("Room not found"));
-        if (room == null) {
-            throw new RuntimeException("Room not found");
-        }
 
         Reservation reservation = new Reservation();
         reservation.setRoomId(roomId);
@@ -59,6 +58,13 @@ public class ReservationService {
         reservation.setStatus(status);
         reservation.setRoom(room);
 
+        // check if the room is available
+        List<Reservation> reservations = reservationRepository.findReservationByRoomId(roomId);
+        for (Reservation r : reservations) {
+            if (r.getCheckInDate().isBefore(checkOutDate) && r.getCheckOutDate().isAfter(checkInDate)) {
+                return null;
+            }
+        }
         return reservationRepository.save(reservation);
     }
 
