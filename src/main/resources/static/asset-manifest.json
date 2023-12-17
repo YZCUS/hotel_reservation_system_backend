@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0f68851d.css",
+    "main.js": "/static/js/main.9f74ad92.js",
+    "static/js/787.b8114e63.chunk.js": "/static/js/787.b8114e63.chunk.js",
+    "static/media/cover3.jpeg": "/static/media/cover3.80500762138b73020f59.jpeg",
+    "static/media/cover2.jpeg": "/static/media/cover2.2c6960a42da534c592ab.jpeg",
+    "static/media/cover.jpg": "/static/media/cover.77b68afe9676fa69b92e.jpg",
+    "static/media/hotel_2.jpg": "/static/media/hotel_2.8de07f1051076d02d93b.jpg",
+    "static/media/hotel_3.jpg": "/static/media/hotel_3.1c314bd9f055a470f3e9.jpg",
+    "static/media/room_7.jpg": "/static/media/room_7.733cbd28ae3dcc71ff3d.jpg",
+    "static/media/room_4.jpg": "/static/media/room_4.7d55e872162d5113d061.jpg",
+    "static/media/room_5.jpg": "/static/media/room_5.de0c50031f59e09928a6.jpg",
+    "static/media/activity_2.jpg": "/static/media/activity_2.533285c96450bf50099e.jpg",
+    "static/media/activity_1.jpg": "/static/media/activity_1.9588c21e7824ab48441d.jpg",
+    "static/media/dining_4.jpg": "/static/media/dining_4.f6a4b04cbdc062d89607.jpg",
+    "static/media/dining_3.jpg": "/static/media/dining_3.6b37b9a49c7a1adf719d.jpg",
+    "static/media/room_8.jpg": "/static/media/room_8.34648e1e1938f19b0c74.jpg",
+    "static/media/destination_1.jpg": "/static/media/destination_1.7bb44e1027d036f2ac65.jpg",
+    "static/media/room_6.jpg": "/static/media/room_6.b521b9fa625bfba39bd5.jpg",
+    "static/media/hotel_1.jpg": "/static/media/hotel_1.a5022dd279c7474d1198.jpg",
+    "static/media/dining_2.jpg": "/static/media/dining_2.ef38cb45d627a702d63b.jpg",
+    "static/media/room_2.jpg": "/static/media/room_2.a5d35f9514989e251b5b.jpg",
+    "static/media/room_3.jpg": "/static/media/room_3.d61074b0c9dc7dd4bac7.jpg",
+    "static/media/room_1.jpg": "/static/media/room_1.09008363161e96b2f63d.jpg",
+    "static/media/dining_1.jpg": "/static/media/dining_1.4ac4762123627bd9bafd.jpg",
+    "index.html": "/index.html",
+    "main.0f68851d.css.map": "/static/css/main.0f68851d.css.map",
+    "main.9f74ad92.js.map": "/static/js/main.9f74ad92.js.map",
+    "787.b8114e63.chunk.js.map": "/static/js/787.b8114e63.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0f68851d.css",
+    "static/js/main.9f74ad92.js"
+  ]
+}

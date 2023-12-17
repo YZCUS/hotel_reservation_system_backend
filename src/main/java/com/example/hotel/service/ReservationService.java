@@ -34,6 +34,9 @@ public class ReservationService {
         if (reservation == null) {
             return null;
         }
+        if(reservation.getStatus().equals("cancelled") && newStatus.equals("confirmed")){
+            return null;
+        }
         reservation.setStatus(newStatus);
         reservationRepository.save(reservation);
         return reservationRepository.findReservationByCustomerId(customerId);
@@ -58,7 +61,9 @@ public class ReservationService {
         reservation.setStatus(status);
         reservation.setRoom(room);
 
-        // check if the room is available
+        // check if the room is available before saving the pending reservation
+        // since it is possible that two users are trying to book the same room at the same time
+        // if user are late, the room will be unavailable
         List<Reservation> reservations = reservationRepository.findReservationByRoomId(roomId);
         for (Reservation r : reservations) {
             if (r.getCheckInDate().isBefore(checkOutDate) && r.getCheckOutDate().isAfter(checkInDate)) {
