@@ -6,7 +6,7 @@ With a variety of hotel brands worldwide, finding and booking the perfect room f
 
 
 ## Getting Started
-### Enviromnent:
+### Environment:
 - Docker: 24.0.8
 - Docker Compose: 2.23.0
 
@@ -22,7 +22,7 @@ cd hotel_reservation_system_backend
 docker-compose build
 ```
 
-- If fail or the target folder did not generate
+- If failed or the target folder did not generate
 ```bash
 ./mvnw package -DskipTests
 ```
