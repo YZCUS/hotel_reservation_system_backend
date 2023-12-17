@@ -39,6 +39,13 @@ CREATE TABLE customers (
     phone_number VARCHAR(50) NOT NULL
 );
 
+-- Creating the 'users' table
+CREATE TABLE users (
+    username VARCHAR(50) NOT NULL UNIQUE PRIMARY KEY,
+    password VARCHAR(255) NOT NULL,
+    customer_id INTEGER NOT NULL REFERENCES customers(customer_id)
+);
+
 -- Creating the 'reservations' table
 CREATE TABLE reservations (
     reservation_id SERIAL PRIMARY KEY,

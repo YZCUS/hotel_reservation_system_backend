@@ -7,19 +7,21 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/maga_hotel
       - SPRING_DATASOURCE_USERNAME=zhengchy
-      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_DATASOURCE_PASSWORD=java_9053
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     depends_on:
       - db
   db:
-    image: postgres:latest
+    image: postgres:16.1
     ports:
       - "5432:5432"
     environment:
       - POSTGRES_DB=maga_hotel
       - POSTGRES_USER=zhengchy
-      - POSTGRES_PASSWORD=
+      - POSTGRES_PASSWORD=java_9053
     volumes:
-      - dbdata:/var/lib/postgresql/data
       - ./postgres/init:/docker-entrypoint-initdb.d
+      - dbdata:/var/lib/postgresql/data
+      
 volumes:
   dbdata:
