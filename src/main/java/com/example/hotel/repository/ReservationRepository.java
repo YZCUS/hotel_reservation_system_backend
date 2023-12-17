@@ -15,7 +15,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     @Query("SELECT new com.example.hotel.dto.ReservationSummary(r.reservationId, rm.type, rm.number, h.hotelName, r.checkInDate, r.checkOutDate, r.totalPrice, r.status) " +
             "FROM Reservation r JOIN r.room rm JOIN r.room.hotel h WHERE r.customerId = :customerId AND r.status != 'cancelled'"+"ORDER BY r.reservationId DESC")
-    List<ReservationSummary> getReservationByCustomerId(@Param("customerId") Long customerId);
+    List<ReservationSummary> getReservationByCustomerId(Long customerId);
 
     List<Reservation> findByStatusAndCreatedTimeBefore(String pending, LocalDateTime fifteenMinutesAgo);
 

@@ -25,7 +25,7 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
             "(r.pricePerNight <= :maxPrice) AND " +
             "NOT EXISTS (SELECT res FROM Reservation res WHERE res.room = r AND " +
             "(((res.checkInDate <= :checkOutDate) AND " +
-            "(res.checkOutDate >= :checkInDate))) AND res.status = 'pending' OR res.status = 'active')")
+            "(res.checkOutDate >= :checkInDate))) AND (res.status = 'pending' OR res.status = 'confirmed'))")
     List<ReservationDetails> findAvailableRooms(String hotelBrand, Integer bedNumber, String roomType,
                                                 BigDecimal minPrice, BigDecimal maxPrice,
                                                 LocalDate checkInDate, LocalDate checkOutDate);

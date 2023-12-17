@@ -66,7 +66,7 @@ public class ReservationService {
         // if user are late, the room will be unavailable
         List<Reservation> reservations = reservationRepository.findReservationByRoomId(roomId);
         for (Reservation r : reservations) {
-            if (r.getCheckInDate().isBefore(checkOutDate) && r.getCheckOutDate().isAfter(checkInDate)) {
+            if (r.getCheckInDate().isBefore(checkOutDate) && r.getCheckOutDate().isAfter(checkInDate) && (r.getStatus().equals("confirmed")||r.getStatus().equals("pending"))) {
                 return null;
             }
         }
